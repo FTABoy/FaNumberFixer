@@ -1,0 +1,7 @@
+-v4.0:
+dar in version ba tavajoh be sohbat haii ke dar goroh va anjoman shod tasmim gereftim script tabdil adad va harof 2script joda bashan.
+query overpass behbood peyda kard.
+baraye amniat bishtar list mojaz va gheyr mojaz tarif shod
+
+-v3.0:
+upgraded script to work on python 3
