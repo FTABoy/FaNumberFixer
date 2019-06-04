@@ -8,6 +8,7 @@ https://forum.openstreetmap.org/viewtopic.php?id=66354
 به طور خلاصه :
 
 تبدیل اعداد اعداد انگلیسی و یا عربی به فارسی ، در تگ نام
+
 توجه: این اسکریپت فقط باید اکانت اختصاصی اسکریپت به نام زیر اجرا شود
 https://www.openstreetmap.org/user/FaNumberFixer
 </div>
