@@ -1,5 +1,5 @@
 cls
 chcp 1256
 cls
-python OSMNumberFixer.py
+python FaNumberFixer.py
 pause
