@@ -1,5 +1,6 @@
 # OSM FaNumberFixer
-A script to fix number issue in name tag in OpenStreetMap in Iran
+A script for fixing numbers issue in name tag on OpenStreetMap Iran.
+
 Converting English digits [1234567890] and also Arabic digits [٤٥٦] into their equivalents in Perisan encoding [۴۵۶].
 <div dir="rtl">
 این اسکریپت برای اصلاح نقشه OpenStreetMap در محدوده ایران تهیه و توسعه داده شده است و موارد مشکلات مطرح شده در لینک زیر (انجمن) را برطرف میکند:
