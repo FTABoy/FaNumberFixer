@@ -1,3 +1,6 @@
+-v4.1:
+ezafe kardane function log va module pytz baraye timestamp kardan...
+
 -v4.0:
 dar in version ba tavajoh be sohbat haii ke dar goroh va anjoman shod tasmim gereftim script tabdil adad va harof 2script joda bashan.
 query overpass behbood peyda kard.
