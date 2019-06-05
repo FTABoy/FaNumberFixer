@@ -14,5 +14,6 @@ https://forum.openstreetmap.org/viewtopic.php?id=66354
 https://www.openstreetmap.org/user/FaNumberFixer
 
 لطفا از اجرا و آپلود کردن تغییرات بدون هماهنگی بپرهیزید.
+
 لینک صفحه ویکی : (به زودی)
 </div>
