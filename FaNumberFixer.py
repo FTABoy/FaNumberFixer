@@ -2,15 +2,28 @@
 # -*- coding: utf-8 -*-
 # Converting English digits [1234567890] and also Arabic digits [٤٥٦] into their equivalents in Perisan encoding [۴۵۶].
 
-import re,fileinput,sys,os
+import re,fileinput,sys,os,datetime
 import xml.etree.ElementTree as ET
 sys.path.append(os.path.dirname(os.path.realpath(__file__))+"/modules")
 import persian
+import pytz
 
-print("* Loading File")
+debugging = True
+
+def log(text):
+	print(text)
+	text = str(text)
+	if debugging == True:
+		now = datetime.datetime.now(pytz.timezone('Asia/Tehran'))
+		with open(os.path.dirname(os.path.realpath(__file__))+"/log.txt", 'ab') as file:
+			text = now.strftime("%Y-%m-%d %H:%M:%S")+":   "+text+"\n"
+			text = text.encode('utf8')
+			file.write(text)
+
+log("* Loading File")
 tree = ET.parse('input.osm')		#Source input file name
 root = tree.getroot()
-print("* File loaded, Fixing.")
+log("* File loaded, Fixing.")
 
 counter = 0
 issuecounter = 0
@@ -20,14 +33,14 @@ en_numbers = 0
 accepted_chars = ['ا','آ','ب','پ','ت','ث','ج','چ','ح','خ','د','ذ','ر','ز','ژ','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ک','گ','ل','م','ن','و','ه','ی','1','2','3','4','5','6','7','8','9','۰','۱','۲','۳','۴','۵','۶','۷','۸','۹','٤','٥','٦']
 # do not edit names which have one of this characters in them.
 ignore_list = ['ك','ي','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',]
-print("Working on Nodes:")
+log("Working on Nodes:")
 for node in root.findall('node'):
 	for tag in node.findall('tag'):
 		k = tag.attrib['k']
 		if k=='name':
 			name = tag.attrib['v']
 			if any(char in name for char in ignore_list):
-				print("    '"+name+"' matched in ignore_list , it didn't get touched")
+				log("    '"+name+"' matched in ignore_list , it didn't get touched")
 				continue
 			if any(char in name for char in accepted_chars):
 				temp = tag.attrib['v']
@@ -46,8 +59,8 @@ for node in root.findall('node'):
 					tag.attrib['v'] = v_fixed
 					node.set('action', 'modify')
 			else:
-				print ("    Warning: '"+name+"' did not matched in accepted_chars , it didn't get touched")
-print (str(counter) + " node With "+str(issuecounter)+" Issue Fixed. \n("+str(ar_numbers)+" Arabic Numbers - "+str(en_numbers)+" English Numbers)")
+				log ("    Warning: '"+name+"' did not matched in accepted_chars , it didn't get touched")
+log (str(counter) + " node With "+str(issuecounter)+" Issue Fixed.  ("+str(ar_numbers)+" Arabic Numbers - "+str(en_numbers)+" English Numbers)")
 
 
 
@@ -55,14 +68,14 @@ counter = 0
 issuecounter = 0
 ar_numbers = 0
 en_numbers = 0
-print("Working on Ways:")
+log("Working on Ways:")
 for way in root.findall('way'):
 	for tag in way.findall('tag'):
 		k = tag.attrib['k']
 		if k=='name':
 			name = tag.attrib['v']
 			if any(char in name for char in ignore_list):
-				print("    '"+name+"' matched in ignore_list , it didn't get touched")
+				log("    '"+name+"' matched in ignore_list , it didn't get touched")
 				continue
 			if any(char in name for char in accepted_chars):
 				temp = tag.attrib['v']
@@ -81,8 +94,8 @@ for way in root.findall('way'):
 					tag.attrib['v'] = v_fixed
 					way.set('action', 'modify')
 			else:
-				print ("    Warning: '"+name+"' did not matched in accepted_chars , it didn't get touched")
-print (str(counter) + " way With "+str(issuecounter)+" Issue Fixed. \n("+str(ar_numbers)+" Arabic Numbers - "+str(en_numbers)+" English Numbers)")
+				log ("    Warning: '"+name+"' did not matched in accepted_chars , it didn't get touched")
+log (str(counter) + " way With "+str(issuecounter)+" Issue Fixed.  ("+str(ar_numbers)+" Arabic Numbers - "+str(en_numbers)+" English Numbers)")
 
 
 
@@ -90,14 +103,14 @@ print (str(counter) + " way With "+str(issuecounter)+" Issue Fixed. \n("+str(ar_
 # issuecounter = 0
 # ar_numbers = 0
 # en_numbers = 0
-# print("Working on Relations:")
+# log("Working on Relations:")
 # for relation in root.findall('relation'):
 	# for tag in relation.findall('tag'):
 		# k = tag.attrib['k']
 		# if k=='name':
 			# name = tag.attrib['v']
 			# if any(char in name for char in ignore_list):
-				# print("    '"+name+"' matched in ignore_list , it didn't get touched")
+				# log("    '"+name+"' matched in ignore_list , it didn't get touched")
 				# continue
 			# if any(char in name for char in accepted_chars):
 				# temp = tag.attrib['v']
@@ -116,16 +129,18 @@ print (str(counter) + " way With "+str(issuecounter)+" Issue Fixed. \n("+str(ar_
 					# tag.attrib['v'] = v_fixed
 					# relation.set('action', 'modify')
 			# else:
-				# print ("    Warning: '"+name+"' did not matched in accepted_chars , it didn't get touched")
-# print (str(counter) + " Relation With "+str(issuecounter)+" Issue Fixed. \n("+str(ar_numbers)+" Arabic Numbers - "+str(en_numbers)+" English Numbers)")
+				# log ("    Warning: '"+name+"' did not matched in accepted_chars , it didn't get touched")
+# log (str(counter) + " Relation With "+str(issuecounter)+" Issue Fixed.  ("+str(ar_numbers)+" Arabic Numbers - "+str(en_numbers)+" English Numbers)")
 
-print ("")
-print ("* Writing to output file")
+log ("")
+log ("* Writing to output file")
 tree.write('output.osm',encoding="UTF-8")
-print ("* Done.")
+log ("* Done.")
 
 
+log("------------------------------------------------------------------------------------------")
 
+print(os.path.dirname(os.path.realpath(__file__))+"\log.txt")
 
 
 
