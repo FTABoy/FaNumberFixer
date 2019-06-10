@@ -17,5 +17,5 @@ https://www.openstreetmap.org/user/FaNumberFixer
 
 لطفا از اجرا و آپلود کردن تغییرات بدون هماهنگی بپرهیزید.
 
-لینک صفحه ویکی : (به زودی)
+لینک صفحه ویکی : https://wiki.openstreetmap.org/wiki/Automated_edits/FaNumberFixer
 </div>
