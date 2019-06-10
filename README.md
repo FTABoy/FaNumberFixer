@@ -13,7 +13,7 @@ https://forum.openstreetmap.org/viewtopic.php?id=66354
 
 توجه: این اسکریپت فقط باید با اکانت اختصاصی اسکریپت به نام زیر اجرا شود
 
-https://www.openstreetmap.org/user/FaNumberFixer
+https://www.openstreetmap.org/user/FaNumberFixerBot
 
 لطفا از اجرا و آپلود کردن تغییرات بدون هماهنگی بپرهیزید.
 
